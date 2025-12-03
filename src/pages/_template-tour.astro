@@ -1,0 +1,86 @@
+---
+/**
+ * TEMPLATE POUR UN NOUVEAU TOUR
+ * 
+ * Pour créer un nouveau tour :
+ * 1. Dupliquer ce fichier avec le nom de votre tour (ex: tour-sunset.astro)
+ * 2. Modifier la config ci-dessous
+ * 3. Ajouter les images dans /public/gallery-[nom-du-tour]/
+ * 4. C'est prêt !
+ */
+
+import Layout from '../layouts/Layout.astro';
+
+const config = {
+  // ⚠️ À PERSONNALISER POUR CE TOUR
+  businessName: "Tour Sunset",
+  tagline: "Admirez le coucher de soleil sur le Mékong",
+  description: "Tour en voiturette électrique au coucher du soleil. Vue panoramique sur le Mékong et la péninsule de Luang Prabang.",
+  whatsapp: "856XXXXXXXXX",
+  facebookUrl: "https://www.facebook.com/ta-page",
+  heroImage: "/hero-sunset.jpg",
+  duration: "1h30",
+  languages: ["Français", "English"],
+  
+  highlights: [
+    "Point de vue panoramique",
+    "Coucher de soleil sur le Mékong",
+    "Atmosphère romantique",
+    "Photos inoubliables"
+  ],
+  
+  pricing: [
+    {
+      name: "Duo",
+      capacity: "2 personnes",
+      price: "XX",
+      currency: "USD",
+      note: "Idéal couples",
+      popular: true
+    }
+  ],
+  
+  gallery: [
+    { src: "/gallery-sunset/photo1.jpg", alt: "Coucher de soleil sur le Mékong" }
+  ],
+  
+  testimonials: [
+    {
+      name: "Sophie M.",
+      country: "France",
+      text: "Un moment magique à ne pas manquer !",
+      rating: 5
+    }
+  ],
+  
+  faq: [
+    {
+      question: "À quelle heure commence le tour ?",
+      answer: "Le départ est environ 1h avant le coucher du soleil, selon la saison."
+    }
+  ],
+  
+  map: {
+    centerLat: 19.8856,
+    centerLng: 102.1347,
+    zoom: 15,
+    startPoint: "À confirmer lors de la réservation"
+  }
+};
+---
+
+<!-- 
+  Le reste du template est identique à index.astro
+  Copiez le contenu HTML de index.astro ici
+-->
+
+<Layout 
+  title={`${config.businessName} | Visite Luang Prabang`}
+  description={config.description}
+>
+  <div style="padding: 4rem; text-align: center;">
+    <h1>🚧 Template de tour</h1>
+    <p>Copiez le contenu HTML de index.astro pour compléter cette page.</p>
+    <p>Ou dupliquez directement index.astro et modifiez la config.</p>
+  </div>
+</Layout>

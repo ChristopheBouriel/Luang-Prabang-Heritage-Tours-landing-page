@@ -1,0 +1,1045 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// ⚠️ À MODIFIER : vos informations
+const config = {
+  businessName: "Nom de la Visite",
+  tagline: "Découvrez l'histoire de Luang Prabang en voiturette électrique",
+  description: "Visite audio-guidée de Luang Prabang en voiturette électrique. Explorez le patrimoine UNESCO, temples et quartiers historiques. Réservez facilement via WhatsApp.",
+  whatsapp: "856XXXXXXXXX", // Sans le +
+  facebookUrl: "https://www.facebook.com/ta-page",
+  heroImage: "/hero.jpg",
+  duration: "2 heures",
+  languages: ["Français", "English", "ລາວ"],
+  
+  // ⚠️ Horaires d'ouverture
+  schedule: {
+    days: "Tous les jours",
+    hours: "8h00 - 18h00",
+    lastDeparture: "16h00",
+    note: "Dernier départ à 16h pour profiter de la lumière"
+  },
+  
+  // ⚠️ Infos paiement
+  payment: {
+    methods: ["Cash (USD, LAK, THB)", "À l'hôtel"],
+    note: "Paiement sur place uniquement"
+  },
+  
+  highlights: [
+    "Centre historique UNESCO",
+    "Temples emblématiques",
+    "Quartier colonial français",
+    "Confluence Mékong & Nam Khan"
+  ],
+  // ⚠️ Tarifs à personnaliser
+  pricing: [
+    {
+      name: "Solo / Couple",
+      capacity: "1-2 personnes",
+      price: "XX",
+      currency: "USD",
+      note: "Voiturette privée"
+    },
+    {
+      name: "Famille / Amis",
+      capacity: "3-4 personnes",
+      price: "XX",
+      currency: "USD",
+      note: "Voiturette privée",
+      popular: true
+    },
+    {
+      name: "Groupe",
+      capacity: "5+ personnes",
+      price: "Sur devis",
+      currency: "",
+      note: "Nous contacter"
+    }
+  ],
+  // ⚠️ Galerie - ajouter vos images dans /public/gallery/
+  gallery: [
+    { src: "/gallery/photo1.jpg", alt: "Vue sur le Mékong depuis la voiturette" },
+    { src: "/gallery/photo2.jpg", alt: "Temple Wat Xieng Thong" },
+    { src: "/gallery/photo3.jpg", alt: "Rue coloniale française" },
+    { src: "/gallery/photo4.jpg", alt: "Voiturette électrique" },
+    { src: "/gallery/photo5.jpg", alt: "Confluence des rivières" },
+    { src: "/gallery/photo6.jpg", alt: "Architecture traditionnelle lao" }
+  ],
+  // ⚠️ Témoignages clients
+  testimonials: [
+    {
+      name: "Marie L.",
+      country: "France",
+      text: "Une façon originale et confortable de découvrir Luang Prabang. L'audio-guide est passionnant, on apprend énormément sur l'histoire de la ville !",
+      rating: 5
+    },
+    {
+      name: "John D.",
+      country: "Australia",
+      text: "Perfect for families! The kids loved the electric cart and we could stop whenever we wanted for photos. Highly recommend!",
+      rating: 5
+    },
+    {
+      name: "Tanaka S.",
+      country: "Japan",
+      text: "Very informative tour with beautiful scenery. The guide was flexible with timing. Great experience!",
+      rating: 5
+    }
+  ],
+  // ⚠️ FAQ
+  faq: [
+    {
+      question: "Combien de temps dure la visite ?",
+      answer: "La visite dure environ 2 heures, mais nous sommes flexibles. Vous pouvez demander des arrêts photos supplémentaires."
+    },
+    {
+      question: "La visite est-elle adaptée aux enfants ?",
+      answer: "Absolument ! La voiturette est confortable et sécurisée. Les enfants adorent l'expérience et l'audio-guide est accessible à tous."
+    },
+    {
+      question: "Que se passe-t-il en cas de pluie ?",
+      answer: "La voiturette est équipée d'un toit. En cas de forte pluie, nous pouvons reporter la visite sans frais."
+    },
+    {
+      question: "Faut-il réserver à l'avance ?",
+      answer: "Nous recommandons de réserver au moins la veille via WhatsApp, surtout en haute saison (novembre-février)."
+    },
+    {
+      question: "Le pickup à l'hôtel est-il inclus ?",
+      answer: "Oui, nous venons vous chercher gratuitement dans les hôtels du centre-ville de Luang Prabang."
+    }
+  ],
+  // ⚠️ Carte du parcours - coordonnées du point central
+  map: {
+    // Centre de la carte (centre-ville LP)
+    centerLat: 19.8856,
+    centerLng: 102.1347,
+    zoom: 15,
+    // Point de départ affiché
+    startPoint: "Près du Palais Royal"
+  }
+};
+---
+
+<Layout 
+  title={`${config.businessName} | Visite audio-guidée Luang Prabang`}
+  description={config.description}
+>
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>{config.businessName}</h1>
+      <p class="tagline">{config.tagline}</p>
+      
+      <div class="badges">
+        <span class="badge">🚗 Voiturette électrique</span>
+        <span class="badge">🎧 Audio-guide</span>
+        <span class="badge">⏱️ {config.duration}</span>
+      </div>
+      
+      <div class="cta-buttons">
+        <a 
+          href={`https://wa.me/${config.whatsapp}?text=Bonjour, je souhaite réserver une visite audio-guidée`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-whatsapp"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Réserver via WhatsApp
+        </a>
+        
+        <a 
+          href={config.facebookUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-facebook"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+          Photos & Avis
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Section L'expérience -->
+  <section class="section about">
+    <div class="container">
+      <h2>L'expérience</h2>
+      <p>
+        Montez à bord de notre voiturette électrique et laissez-vous guider 
+        à travers les ruelles chargées d'histoire de Luang Prabang, 
+        ville classée au patrimoine mondial de l'UNESCO.
+      </p>
+      <p>
+        Notre audio-guide vous raconte l'histoire fascinante de l'ancienne 
+        capitale royale du Laos, de ses temples centenaires à son architecture 
+        coloniale française.
+      </p>
+      
+      <div class="languages">
+        <strong>Audio disponible en :</strong>
+        {config.languages.map(lang => (
+          <span class="lang-tag">{lang}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Points forts -->
+  <section class="section highlights">
+    <div class="container">
+      <h2>Points forts du parcours</h2>
+      <ul class="highlights-grid">
+        {config.highlights.map(item => (
+          <li class="highlight-item">
+            <span class="highlight-icon">✓</span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section Galerie photos -->
+  <section class="section gallery">
+    <div class="container">
+      <h2>En images</h2>
+      <div class="gallery-grid">
+        {config.gallery.map(photo => (
+          <div class="gallery-item">
+            <img src={photo.src} alt={photo.alt} loading="lazy" />
+          </div>
+        ))}
+      </div>
+      <p class="gallery-cta">
+        <a href={config.facebookUrl} target="_blank" rel="noopener noreferrer">
+          Voir plus de photos sur Facebook →
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Section Tarifs -->
+  <section class="section pricing">
+    <div class="container">
+      <h2>Tarifs</h2>
+      <div class="pricing-grid">
+        {config.pricing.map(plan => (
+          <div class={`pricing-card ${plan.popular ? 'popular' : ''}`}>
+            {plan.popular && <span class="popular-badge">Populaire</span>}
+            <h3>{plan.name}</h3>
+            <p class="capacity">{plan.capacity}</p>
+            <div class="price">
+              {plan.currency && <span class="currency">{plan.currency}</span>}
+              <span class="amount">{plan.price}</span>
+            </div>
+            <p class="note">{plan.note}</p>
+            <a 
+              href={`https://wa.me/${config.whatsapp}?text=Bonjour, je souhaite réserver une visite (${plan.name})`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="pricing-cta"
+            >
+              Réserver
+            </a>
+          </div>
+        ))}
+      </div>
+      <p class="pricing-info">
+        💡 Tous les tarifs incluent : voiturette privée, audio-guide, durée {config.duration}<br>
+        <strong>💵 {config.payment.note}</strong> — {config.payment.methods.join(', ')}
+      </p>
+    </div>
+  </section>
+
+  <!-- Section Témoignages -->
+  <section class="section testimonials">
+    <div class="container">
+      <h2>Ce que disent nos visiteurs</h2>
+      <div class="testimonials-grid">
+        {config.testimonials.map(t => (
+          <div class="testimonial-card">
+            <div class="stars">
+              {Array(t.rating).fill('⭐').join('')}
+            </div>
+            <p class="testimonial-text">"{t.text}"</p>
+            <p class="testimonial-author">
+              <strong>{t.name}</strong> · {t.country}
+            </p>
+          </div>
+        ))}
+      </div>
+      <p class="testimonials-cta">
+        <a href={config.facebookUrl} target="_blank" rel="noopener noreferrer">
+          Voir tous les avis sur Facebook →
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Section Carte du parcours -->
+  <section class="section map-section">
+    <div class="container">
+      <h2>Le parcours</h2>
+      <p class="map-intro">
+        Notre circuit vous emmène à travers les sites les plus emblématiques de Luang Prabang. 
+        Point de départ : <strong>{config.map.startPoint}</strong>
+      </p>
+      <div class="map-wrapper">
+        <iframe 
+          src={`https://www.openstreetmap.org/export/embed.html?bbox=${config.map.centerLng - 0.015}%2C${config.map.centerLat - 0.01}%2C${config.map.centerLng + 0.015}%2C${config.map.centerLat + 0.01}&layer=mapnik&marker=${config.map.centerLat}%2C${config.map.centerLng}`}
+          width="100%" 
+          height="400" 
+          style="border: 0; border-radius: 12px;"
+          loading="lazy"
+          title="Carte du parcours à Luang Prabang"
+        ></iframe>
+      </div>
+      <p class="map-note">
+        📍 Le parcours exact peut varier selon vos préférences. N'hésitez pas à nous demander !
+      </p>
+    </div>
+  </section>
+
+  <!-- Section FAQ -->
+  <section class="section faq">
+    <div class="container">
+      <h2>Questions fréquentes</h2>
+      <div class="faq-list">
+        {config.faq.map((item, index) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              {item.question}
+              <span class="faq-icon">+</span>
+            </summary>
+            <p class="faq-answer">{item.answer}</p>
+          </details>
+        ))}
+      </div>
+      <p class="faq-contact">
+        Une autre question ? 
+        <a 
+          href={`https://wa.me/${config.whatsapp}?text=Bonjour, j'ai une question concernant la visite`}
+          target="_blank"
+        >
+          Contactez-nous sur WhatsApp
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Section Infos pratiques -->
+  <section class="section info">
+    <div class="container">
+      <h2>Infos pratiques</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>📍 Point de départ</h3>
+          <p>À définir lors de la réservation<br>(pickup possible à votre hôtel)</p>
+        </div>
+        
+        <div class="info-card">
+          <h3>🕐 Horaires</h3>
+          <p><strong>{config.schedule.days}</strong><br>
+          {config.schedule.hours}</p>
+          <p class="info-note">{config.schedule.note}</p>
+        </div>
+        
+        <div class="info-card">
+          <h3>⏱️ Durée</h3>
+          <p>{config.duration}<br>Départs flexibles</p>
+        </div>
+        
+        <div class="info-card">
+          <h3>💵 Paiement</h3>
+          <p><strong>{config.payment.note}</strong></p>
+          <p class="info-small">{config.payment.methods.join(' · ')}</p>
+        </div>
+        
+        <div class="info-card">
+          <h3>📞 Réservation</h3>
+          <p>Réservez facilement par WhatsApp</p>
+          <a 
+            href={`https://wa.me/${config.whatsapp}?text=Bonjour, je voudrais des informations sur la visite`}
+            target="_blank"
+            class="link-whatsapp"
+          >
+            Nous contacter →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© {new Date().getFullYear()} {config.businessName}. Tous droits réservés.</p>
+      <p class="footer-location">Luang Prabang, Laos 🇱🇦</p>
+      <div class="footer-links">
+        <a 
+          href={config.facebookUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+        >
+          Facebook
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Barre CTA sticky (apparaît au scroll) -->
+  <div class="sticky-cta" id="stickyCta">
+    <div class="sticky-cta-content">
+      <div class="sticky-cta-info">
+        <span class="sticky-cta-name">{config.businessName}</span>
+        <span class="sticky-cta-price">À partir de {config.pricing[0].price} {config.pricing[0].currency}</span>
+      </div>
+      <a 
+        href={`https://wa.me/${config.whatsapp}?text=Bonjour, je souhaite réserver une visite`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="sticky-cta-btn"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Réserver
+      </a>
+    </div>
+  </div>
+
+  <!-- Script minimal pour afficher/masquer la barre sticky -->
+  <script>
+    const stickyCta = document.getElementById('stickyCta');
+    const heroHeight = window.innerHeight;
+    
+    function toggleStickyCta() {
+      if (window.scrollY > heroHeight * 0.7) {
+        stickyCta.classList.add('visible');
+      } else {
+        stickyCta.classList.remove('visible');
+      }
+    }
+    
+    window.addEventListener('scroll', toggleStickyCta, { passive: true });
+    toggleStickyCta();
+  </script>
+</Layout>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2d5016 0%, #1a3a0f 100%);
+    background-image: url('/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+  }
+  
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+    max-width: 800px;
+  }
+  
+  .hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+  
+  .tagline {
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    opacity: 0.95;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Badges */
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  .badge {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  /* CTA Buttons */
+  .cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  .btn-whatsapp {
+    background-color: #25D366;
+    color: white;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+  }
+  
+  .btn-whatsapp:hover {
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+  }
+  
+  .btn-facebook {
+    background-color: #1877F2;
+    color: white;
+    box-shadow: 0 4px 14px rgba(24, 119, 242, 0.4);
+  }
+  
+  .btn-facebook:hover {
+    box-shadow: 0 6px 20px rgba(24, 119, 242, 0.5);
+  }
+  
+  /* Sections */
+  .section {
+    padding: 5rem 1.5rem;
+  }
+  
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #1a3a0f;
+  }
+  
+  .about p {
+    max-width: 700px;
+    margin: 0 auto 1rem;
+    text-align: center;
+    color: #444;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+  
+  /* Languages */
+  .languages {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .lang-tag {
+    display: inline-block;
+    background: #e8f5e9;
+    color: #2d5016;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    margin: 0.25rem;
+    font-size: 0.95rem;
+  }
+  
+  /* Highlights */
+  .highlights {
+    background: linear-gradient(135deg, #f5f9f5 0%, #e8f5e9 100%);
+  }
+  
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: white;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    font-size: 1.05rem;
+  }
+  
+  .highlight-icon {
+    color: #25D366;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  /* Gallery */
+  .gallery {
+    background: #fff;
+  }
+  
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  
+  .gallery-item {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+  
+  .gallery-cta {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .gallery-cta a {
+    color: #1877F2;
+    font-weight: 600;
+  }
+  
+  .gallery-cta a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Pricing */
+  .pricing {
+    background: linear-gradient(135deg, #f5f9f5 0%, #e8f5e9 100%);
+  }
+  
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .pricing-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    position: relative;
+    transition: transform 0.2s;
+  }
+  
+  .pricing-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .pricing-card.popular {
+    border: 2px solid #25D366;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.2);
+  }
+  
+  .popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #25D366;
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  
+  .pricing-card h3 {
+    font-size: 1.3rem;
+    color: #1a3a0f;
+    margin-bottom: 0.25rem;
+  }
+  
+  .pricing-card .capacity {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+  
+  .pricing-card .price {
+    margin-bottom: 0.5rem;
+  }
+  
+  .pricing-card .currency {
+    font-size: 1.2rem;
+    vertical-align: top;
+    color: #1a3a0f;
+  }
+  
+  .pricing-card .amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a3a0f;
+  }
+  
+  .pricing-card .note {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .pricing-cta {
+    display: inline-block;
+    background: #25D366;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.2s;
+  }
+  
+  .pricing-cta:hover {
+    background: #1fb855;
+    transform: scale(1.02);
+  }
+  
+  .pricing-info {
+    text-align: center;
+    margin-top: 2rem;
+    color: #555;
+    font-size: 0.95rem;
+  }
+  
+  /* Testimonials */
+  .testimonials {
+    background: #fff;
+  }
+  
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .testimonial-card {
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 1.75rem;
+    border-left: 4px solid #25D366;
+  }
+  
+  .testimonial-card .stars {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .testimonial-text {
+    font-style: italic;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .testimonial-author {
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .testimonials-cta {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .testimonials-cta a {
+    color: #1877F2;
+    font-weight: 600;
+  }
+  
+  .testimonials-cta a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Map */
+  .map-section {
+    background: linear-gradient(135deg, #f5f9f5 0%, #e8f5e9 100%);
+  }
+  
+  .map-intro {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+    color: #444;
+  }
+  
+  .map-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .map-note {
+    text-align: center;
+    margin-top: 1rem;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  /* FAQ */
+  .faq {
+    background: #fff;
+  }
+  
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .faq-item {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0;
+    cursor: pointer;
+    font-weight: 600;
+    color: #1a3a0f;
+    font-size: 1.05rem;
+    list-style: none;
+  }
+  
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+  
+  .faq-icon {
+    font-size: 1.5rem;
+    color: #25D366;
+    transition: transform 0.2s;
+  }
+  
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+  
+  .faq-answer {
+    padding: 0 0 1.25rem 0;
+    color: #555;
+    line-height: 1.7;
+  }
+  
+  .faq-contact {
+    text-align: center;
+    margin-top: 2.5rem;
+    color: #555;
+  }
+  
+  .faq-contact a {
+    color: #25D366;
+    font-weight: 600;
+  }
+  
+  .faq-contact a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Info card notes */
+  .info-note {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 0.5rem;
+  }
+  
+  .info-small {
+    font-size: 0.85rem;
+    color: #666;
+  }
+  
+  /* Sticky CTA Bar */
+  .sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    padding: 0.75rem 1.5rem;
+    z-index: 99;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sticky-cta.visible {
+    transform: translateY(0);
+  }
+  
+  .sticky-cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  .sticky-cta-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sticky-cta-name {
+    font-weight: 600;
+    color: #1a3a0f;
+    font-size: 0.95rem;
+  }
+  
+  .sticky-cta-price {
+    font-size: 0.85rem;
+    color: #666;
+  }
+  
+  .sticky-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #25D366;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  
+  .sticky-cta-btn:hover {
+    background: #1fb855;
+  }
+  
+  /* Ajuster le padding du footer quand sticky visible */
+  .footer {
+    padding-bottom: 5rem;
+  }
+  
+  /* Cacher bouton WhatsApp flottant sur mobile quand sticky visible */
+  @media (max-width: 640px) {
+    .sticky-cta.visible ~ .whatsapp-float,
+    body:has(.sticky-cta.visible) .whatsapp-float {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+  
+  /* Info Grid */
+  .info {
+    background-color: #fafafa;
+  }
+  
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  
+  .info-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+  
+  .info-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: #1a3a0f;
+  }
+  
+  .info-card p {
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  
+  .link-whatsapp {
+    color: #25D366;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+  
+  .link-whatsapp:hover {
+    text-decoration: underline;
+  }
+  
+  /* Footer */
+  .footer {
+    background: #1a3a0f;
+    color: #ccc;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+  }
+  
+  .footer-location {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .footer-links {
+    margin-top: 1rem;
+  }
+  
+  .footer-links a {
+    color: #ddd;
+    margin: 0 0.5rem;
+  }
+  
+  .footer-links a:hover {
+    color: white;
+  }
+</style>

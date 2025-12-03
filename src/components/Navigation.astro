@@ -1,0 +1,139 @@
+---
+/**
+ * Navigation pour site multi-tours
+ * 
+ * À utiliser quand vous avez plusieurs tours.
+ * Ajoutez ce composant dans Layout.astro après <body>
+ * 
+ * Exemple d'utilisation :
+ * ---
+ * import Navigation from '../components/Navigation.astro';
+ * ---
+ * <body>
+ *   <Navigation />
+ *   <slot />
+ * </body>
+ */
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = Astro.url.pathname } = Astro.props;
+
+// ⚠️ À MODIFIER : liste de vos tours
+const tours = [
+  { name: "Tour Historique", path: "/" },
+  // Décommentez et ajoutez vos tours ici :
+  // { name: "Tour Sunset", path: "/tour-sunset" },
+  // { name: "Tour Temples", path: "/tour-temples" },
+];
+
+const businessName = "Votre Entreprise"; // Nom global
+const whatsapp = "856XXXXXXXXX";
+---
+
+<nav class="main-nav">
+  <div class="nav-container">
+    <a href="/" class="nav-logo">{businessName}</a>
+    
+    {tours.length > 1 && (
+      <div class="nav-tours">
+        {tours.map(tour => (
+          <a 
+            href={tour.path} 
+            class={`nav-link ${currentPath === tour.path ? 'active' : ''}`}
+          >
+            {tour.name}
+          </a>
+        ))}
+      </div>
+    )}
+    
+    <a 
+      href={`https://wa.me/${whatsapp}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="nav-cta"
+    >
+      Réserver
+    </a>
+  </div>
+</nav>
+
+<style>
+  .main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    z-index: 100;
+    padding: 0.75rem 1.5rem;
+  }
+  
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  .nav-logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #1a3a0f;
+  }
+  
+  .nav-tours {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    color: #555;
+    font-size: 0.9rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  
+  .nav-link:hover {
+    background: #f0f0f0;
+    color: #1a3a0f;
+  }
+  
+  .nav-link.active {
+    background: #e8f5e9;
+    color: #1a3a0f;
+    font-weight: 500;
+  }
+  
+  .nav-cta {
+    background: #25D366;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  .nav-cta:hover {
+    background: #1fb855;
+  }
+  
+  /* Si navigation activée, ajouter du padding au body */
+  :global(body.has-nav) {
+    padding-top: 60px;
+  }
+  
+  @media (max-width: 640px) {
+    .nav-tours {
+      display: none;
+    }
+  }
+</style>
