@@ -176,16 +176,30 @@ const config = {
       
       <div class="languages">
         <strong>Audio available in :</strong>
-        {config.languages.map(lang => (
-          <span class="lang-tag">{lang}</span>
-        ))}
       </div>
     </div>
+
+    <nav class="flags-container" aria-label="Available languages">
+      <div class="flags-wrapper">
+        <div class="flags-group">
+          <img src="/gallery/great-britain.png" alt="English" loading="lazy" />
+          <img src="/gallery/france.png" alt="Français" loading="lazy" />
+          <img src="/gallery/germany.png" alt="Deutsch" loading="lazy" />
+          <img src="/gallery/spain.png" alt="Español" loading="lazy" />
+        </div>
+        <div class="flags-group">
+          <img src="/gallery/italy.png" alt="Italiano" loading="lazy" />
+          <img src="/gallery/china.png" alt="中文" loading="lazy" />
+          <img src="/gallery/japan.png" alt="日本語" loading="lazy" />
+          <img src="/gallery/corea.png" alt="한국어" loading="lazy" />
+        </div>
+      </div>
+    </nav>
   </section>
 
   <section class="section highlights">
     <div class="container">
-      <h2>Points forts du parcours</h2>
+      <h2>Highlights</h2>
       <ul class="highlights-grid">
         {config.highlights.map(item => (
           <li class="highlight-item">
@@ -686,7 +700,49 @@ const config = {
     margin: 0.25rem;
     font-size: 0.95rem;
   }
-  
+
+  /* Flags - full bleed */
+  .flags-container {
+    background: #1a1a1a;
+    padding: 1.5rem 1rem;
+    margin-top: 2rem;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+  }
+
+  .flags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .flags-group {
+    display: flex;
+    justify-content: space-around;
+    flex: 1;
+    min-width: 280px;
+    padding: 0.5rem 0;
+  }
+
+  .flags-group img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    transition: transform 0.2s;
+  }
+
+  .flags-group img:hover {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 500px) {
+    .flags-group img {
+      width: 45px;
+      height: 45px;
+    }
+  }
+
   /* Highlights */
   .highlights {
     background: rgba(0, 0, 0, 0.2);
