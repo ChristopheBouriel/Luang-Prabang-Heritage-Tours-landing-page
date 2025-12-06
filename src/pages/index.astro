@@ -163,19 +163,24 @@ const config = {
   </header>
 
   <section class="section about">
-    <div class="container">
+    <div class="container about-content">
       <h2>The experience</h2>
-      <p>
-        Hop aboard our electric buggy and let us guide you through the 
+      <p class="about-intro">
+        Hop aboard our electric buggy and let us guide you through the
         history-filled streets of Luang Prabang, a UNESCO World Heritage city.
       </p>
-      <p>
-        Our audio guide will tell you the fascinating story of the former royal 
+      <figure class="tour-map">
+        <img src="/gallery/map.png" alt="Tour route map of Luang Prabang Heritage Tours" loading="lazy" />
+      </figure>
+      <p class="about-audio">
+        Our audio guide will tell you the fascinating story of the former royal
         capital of Laos, from its centuries-old temples to its French colonial architecture.
       </p>
-      
+      <figure class="tour-audio">
+        <img src="/gallery/casque.png" alt="Audio guide headphones" loading="lazy" />
+      </figure>
       <div class="languages">
-        <strong>Audio available in :</strong>
+        <strong>Audio available in:</strong>
       </div>
     </div>
 
@@ -657,13 +662,14 @@ const config = {
   
   /* Sections */
   .section {
-    padding: 5rem 1.5rem;
+    padding: 2rem 1.5rem;
   }
 
   .section.about {
-    padding-top: 2rem;
+    padding-bottom: 0;
   }
 
+  
   .container {
     max-width: 1100px;
     margin: 0 auto;
@@ -685,10 +691,70 @@ const config = {
     line-height: 1.7;
   }
   
+  /* About section grid layout */
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "intro"
+      "map"
+      "audio"
+      "casque"
+      "langs";
+    gap: 1rem;
+  }
+
+  .about-content h2 { grid-area: title; }
+  .about-intro { grid-area: intro; }
+  .tour-audio { grid-area: casque; }
+  .about-audio { grid-area: audio; }
+  .tour-map { grid-area: map; }
+  .languages { grid-area: langs; }
+
+  /* Tour images */
+  .tour-map,
+  .tour-audio {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .tour-map img {
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20%;
+  }
+  .tour-audio img {
+    margin-top: 15%;
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+    transform: rotate(-20deg)
+  }
+
+  /* Desktop: reorder elements with grid */
+  @media (min-width: 601px) {
+    .about-content {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "title title"
+        "intro intro"
+        "audio audio"
+        "casque map"
+        "langs langs";
+    }
+
+    .tour-audio,
+    .tour-map {
+      justify-self: center;
+    }
+  }
+
   /* Languages */
   .languages {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
   
   .lang-tag {
@@ -703,7 +769,7 @@ const config = {
 
   /* Flags - full bleed */
   .flags-container {
-    background: #1a1a1a;
+    background: #2d2d2d;
     padding: 1.5rem 1rem;
     margin-top: 2rem;
     margin-left: calc(-50vw + 50%);
