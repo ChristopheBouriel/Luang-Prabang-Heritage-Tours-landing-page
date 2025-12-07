@@ -84,27 +84,27 @@ const config = {
 
   faq: [
     {
-      question: "Combien de temps dure la visite ?",
-      answer: "La visite dure environ 1 heures, mais nous sommes flexibles. Vous pouvez demander des arrêts photos supplémentaires."
+      question: "How long does the visit last?",
+      answer: "The tour lasts approximately 1 hour, but we are flexible. You can request additional photo stops."
     },
     {
       question: "What are the departure times ?",
       answer: "The tour starts 4 times a day, from 9.30 AM to 3.30 PM. For flexible departure time contact us to book your private tour."
     },
     {
-      question: "La visite est-elle adaptée aux enfants ?",
-      answer: "Absolument ! La voiturette est confortable et sécurisée. Les enfants adorent l'expérience et l'audio-guide est accessible à tous. Les enfants de moins de douze ans doivent être accompagnés par un adulte"
+      question: "Is the visit suitable for children?",
+      answer: "Absolutely! The buggy is comfortable and safe. Children love the experience, and the audio guide is accessible to everyone. Children under twelve must be accompanied by an adult."
     },
     {
-      question: "Que se passe-t-il en cas de pluie ?",
-      answer: "Le tour est disponible même en cas de pluie."
+      question: "What happens if it rains?",
+      answer: "The tour is available even in the rain."
     },
     {
-      question: "Faut-il réserver à l'avance ?",
+      question: "Do I need to book in advance?",
       answer: "Please book 24 hours in advance to ensure availability."
     },
     {
-      question: "Le pickup à l'hôtel est-il inclus ?",
+      question: "Is hotel pick-up included?",
       answer: "No it's not included, but we would be happy to organise it for you, please contact us."
     }
   ],
@@ -284,10 +284,11 @@ const config = {
       <h2>Prices</h2>
       <div class="pricing-grid">
         {config.pricing.map(plan => (
-          <div class=''>
-            
-            <h3>{plan.name}</h3>
-            <p class="capacity">{plan.capacity}</p>
+          <div class='pricing-card'>
+            <div class="pricing-header">
+              <h3>{plan.name}</h3>
+              <span class="capacity">{plan.capacity}</span>
+            </div>
             <div class="price">
               {plan.currency && <span class="currency">{plan.currency}</span>}
               <span class="amount">{plan.price}</span>
@@ -983,7 +984,7 @@ const config = {
   
   /* Pricing */
   .pricing {
-    background: linear-gradient(135deg, #f5f9f5 0%, #e8f5e9 100%);
+    background: rgba(0, 0, 0, 0.1);
   }
   
   .pricing-grid {
@@ -997,15 +998,15 @@ const config = {
   .pricing-card {
     background: white;
     border-radius: 16px;
-    padding: 2rem;
+    padding: 1rem;
     text-align: center;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    /*box-shadow: 0 2px 12px rgba(0,0,0,0.08);*/
     position: relative;
     transition: transform 0.2s;
   }
   
   .pricing-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-10px);
   }
   
   .pricing-card.popular {
@@ -1013,7 +1014,7 @@ const config = {
     box-shadow: 0 4px 20px rgba(37, 211, 102, 0.2);
   }
   
-  .popular-badge {
+  /*.popular-badge {
     position: absolute;
     top: -12px;
     left: 50%;
@@ -1024,18 +1025,25 @@ const config = {
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 600;
-  }
+  }*/
   
+  .pricing-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
   .pricing-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     color: #1a3a0f;
-    margin-bottom: 0.25rem;
+    margin: 0;
   }
-  
+
   .pricing-card .capacity {
     color: #666;
     font-size: 0.95rem;
-    margin-bottom: 1rem;
   }
   
   .pricing-card .price {
@@ -1056,7 +1064,7 @@ const config = {
   
   .pricing-card .note {
     color: #888;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     margin-bottom: 1.5rem;
   }
   
@@ -1147,13 +1155,6 @@ const config = {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  
-  .map-note {
-    text-align: center;
-    margin-top: 1rem;
-    color: #666;
-    font-size: 0.9rem;
   }
   
   /* FAQ */
@@ -1307,7 +1308,7 @@ const config = {
   
   /* Info Grid */
   .info {
-    background-color: #fafafa;
+    background-color: rgba(0, 0, 0, 0.2);
   }
   
   .info-grid {
@@ -1348,7 +1349,7 @@ const config = {
   
   /* Footer */
   .footer {
-    background: #1a3a0f;
+    background: #2d2d2d;
     color: #ccc;
     padding: 2.5rem 1.5rem;
     text-align: center;
