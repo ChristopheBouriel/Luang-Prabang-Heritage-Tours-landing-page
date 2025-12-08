@@ -8,18 +8,19 @@ const config = {
   description: "Audio-guided tour of Luang Prabang by electric buggy. Explore UNESCO World Heritage sites, temples, and historic districts. Book easily via WhatsApp.",
   whatsapp: "856XXXXXXXXX", // Sans le +
   facebookUrl: "https://www.facebook.com/ta-page",
-  heroImage: "/hero.jpg",
   duration: "1 hour",
-  languages: ["Français", "English", "ລາວ"],
+  languages: ["Français", "English", "Spanish", "German", "Italian", "Chinese", "Corean", "Japanese"],
   
   schedule: {
-    days: "Tous les jours",
-    hours: "8h00 - 18h00",
-    lastDeparture: "16h00",
+    days: "Everyday",
+    hours: ["9.30 AM", "11AM", "14 PM", "3.30 PM"],
+    note: "For changes in case of private tour, contact us"
   },
   
   payment: {
-    methods: ["Cash or Credit Card (USD, LAK, THB)", "at Wine&Co shop"],
+    methods: "Cash or Credit Card",
+    currencies: "USD, LAK, THB",
+    place: "at Wine&Co shop",
     note: "Payment on site only"
   },
   
@@ -63,7 +64,6 @@ const config = {
     { src: "/gallery/namkhan.jpg", alt: "" },
     { src: "/gallery/photo_14.jpg", alt: "" },
     { src: "/gallery/unesco.jpg", alt: "" },
-    { src: "/gallery/photo_16.jpg", alt: "" },
     { src: "/gallery/library.jpg", alt: "" },
     { src: "/gallery/photo32.png", alt: "" },
     { src: "/gallery/photo_19.jpg", alt: "" },
@@ -71,8 +71,6 @@ const config = {
     { src: "/gallery/santi.jpg", alt: "" },
     { src: "/gallery/photo_21.jpg", alt: "" },
     { src: "/gallery/photo_22.jpg", alt: "" },
-    
-    
   ],
 
   testimonials: [
@@ -321,7 +319,7 @@ const config = {
       </div>
       <p class="pricing-info">
         💡  All taxes included<br>
-        <strong>💵 {config.payment.note}</strong> — {config.payment.methods.join(', ')}
+        <strong>💵 {config.payment.note}</strong> — {config.payment.methods}
       </p>
     </div>
   </section>
@@ -354,7 +352,7 @@ const config = {
   <!-- Section FAQ -->
   <section class="section faq">
     <div class="container">
-      <h2>Frequently asked questions</h2>
+      <h2>Frequently Asked Questions</h2>
       <div class="faq-list">
         {config.faq.map((item, index) => (
           <details class="faq-item">
@@ -381,41 +379,45 @@ const config = {
   <!-- Section Infos pratiques -->
   <section class="section info">
     <div class="container">
-      <h2>Infos pratiques</h2>
+      <h2>Key information</h2>
       <div class="info-grid">
         <div class="info-card">
-          <h3>📍 Point de départ</h3>
-          <p>À définir lors de la réservation<br>(pickup possible à votre hôtel)</p>
+          <h3>📍 Starting point</h3>
+          <p><strong>Wine&Co shop</strong></p>
+          <p class="info-note">No pick-up included, but we can organise it!</p>
         </div>
-        
+
         <div class="info-card">
           <h3>🕐 Horaires</h3>
           <p><strong>{config.schedule.days}</strong><br>
-          {config.schedule.hours}</p>
+          <span>{config.schedule.hours.join(' - ')}</span></p>
           <p class="info-note">{config.schedule.note}</p>
         </div>
         
         <div class="info-card">
-          <h3>⏱️ Durée</h3>
-          <p>{config.duration}<br>Départs flexibles</p>
+          <h3>⏱️ Duration</h3>
+          <p><strong>{config.duration}</strong><br>
+          <span>13 points of interest, 8 stops</span></p>
         </div>
         
         <div class="info-card">
-          <h3>💵 Paiement</h3>
-          <p><strong>{config.payment.note}</strong></p>
-          <p class="info-small">{config.payment.methods.join(' · ')}</p>
-        </div>
-        
-        <div class="info-card">
-          <h3>📞 Réservation</h3>
-          <p>Réservez facilement par WhatsApp</p>
+          <h3>📞 Booking</h3>
+          <p><strong>Book easily with WhatsApp</strong></p>
           <a 
             href={`https://wa.me/${config.whatsapp}?text=Bonjour, je voudrais des informations sur la visite`}
             target="_blank"
             class="link-whatsapp"
           >
-            Nous contacter →
+            Contact us →
           </a>
+        </div>
+
+        <div class="info-card">
+          <h3>💵 Payment</h3>
+          <p><strong>{config.payment.note}</strong></p>
+          <p class="info-small">{config.payment.methods}</p>
+          <p class="info-small">{config.payment.currencies}</p>
+          <p class="info-small">{config.payment.place}</p>
         </div>
       </div>
     </div>
@@ -439,7 +441,7 @@ const config = {
     </div>
   </footer>
 
-  <!-- Barre CTA sticky (apparaît au scroll) -->
+  <!-- Barre CTA sticky (apparaît au scroll)
   <div class="sticky-cta" id="stickyCta">
     <div class="sticky-cta-content">
       <div class="sticky-cta-info">
@@ -458,7 +460,7 @@ const config = {
         Book
       </a>
     </div>
-  </div>
+  </div> -->
 
   <!-- Script minimal pour afficher/masquer la barre sticky -->
   <script>
@@ -761,6 +763,7 @@ const config = {
   .languages {
     text-align: center;
     margin-top: 1rem;
+    font-size: 1.4rem;
   }
   
   .lang-tag {
@@ -1338,6 +1341,10 @@ const config = {
   .info-card p {
     color: #555;
     margin-bottom: 0.5rem;
+  }
+
+  .info-card span {
+    font-size: 0.8rem;
   }
   
   .link-whatsapp {
