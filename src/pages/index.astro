@@ -395,20 +395,26 @@ const config = {
           <p class="info-small">{config.payment.currencies}</p>
           <p class="info-small">{config.payment.place}</p>
         </div>
+      </div>
 
-        <div class="info-card">
-          <h3>Included</h3>
-          <p>✅ One-hour guided tour by electric buggy with audio guide</p>
-          <p>✅ Driver/guide</p>
-          <p>✅ Access to the audio guide with anecdotes about 13 historical buildings</p>
-          <p>✅ Eco-friendly, quiet, and comfortable electric vehicle</p>
-          <p>✅ Small group experience (up to 4 passengers)</p>
-          <p>✅ Introduction to the culture, heritage, and local life of Luang Prabang</p>
-          <p>❌ Entrance fees to sites or attractions (if applicable)</p>
-          <p>❌ Food and drinks</p>
-          <p>❌ Tips (for the driver or guide)</p>
-          <p>❌ Hotel pick-up and drop-off (unless otherwise arranged)</p>
-          <p>❌ Personal expenses (souvenirs, purchases, etc.)</p>
+      <div class="info-card info-card-full">
+        <h3>Included / Excluded</h3>
+        <div class="included-grid">
+          <div class="included-col">
+            <p>✅ One-hour guided tour by electric buggy with audio guide</p>
+            <p>✅ Driver/guide</p>
+            <p>✅ Access to the audio guide with anecdotes about 13 historical buildings</p>
+            <p>✅ Eco-friendly, quiet, and comfortable electric vehicle</p>
+            <p>✅ Small group experience (up to 4 passengers)</p>
+            <p>✅ Introduction to the culture, heritage, and local life of Luang Prabang</p>
+          </div>
+          <div class="excluded-col">
+            <p>❌ Entrance fees to sites or attractions (if applicable)</p>
+            <p>❌ Food and drinks</p>
+            <p>❌ Tips (for the driver or guide)</p>
+            <p>❌ Hotel pick-up and drop-off (unless otherwise arranged)</p>
+            <p>❌ Personal expenses (souvenirs, purchases, etc.)</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1342,7 +1348,34 @@ const config = {
   .link-whatsapp:hover {
     text-decoration: underline;
   }
-  
+
+  /* Full-width included/excluded card */
+  .info-card-full {
+    width: 100%;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .included-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  .included-col p,
+  .excluded-col p {
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 600px) {
+    .included-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
   /* Footer */
   .footer {
     background: #2d2d2d;
