@@ -6,7 +6,7 @@ const config = {
   businessName: "Luang Prabang Heritage Tours",
   tagline: "Discover the long history of Luang Prabang in a small electric car",
   description: "Audio-guided tour of Luang Prabang by electric buggy. Explore UNESCO World Heritage sites, temples, and historic districts. Book easily via WhatsApp.",
-  whatsapp: "856XXXXXXXXX", // Sans le +
+  whatsapp: "8562055177979", // Sans le +
   facebookUrl: "https://www.facebook.com/ta-page",
   duration: "1 hour",
   languages: ["Français", "English", "Spanish", "German", "Italian", "Chinese", "Corean", "Japanese"],
@@ -25,9 +25,10 @@ const config = {
   },
   
   highlights: [
-    "Centre historique UNESCO",
-    "Quartier colonial français",
-    "Confluence Mékong & Nam Khan"
+    { image: "/gallery/Nampou-illustration.jpg", text: ["Nam Phou fountain", "The story of mae Thoranee" ]},
+    { image: "/gallery/Sofitel-above.jpg", text: ["Sofitel", "An ancient French colonial fort"] },
+    { image: "/gallery/Unesco-2.jpg", text: ["UNESCO house", ""] },
+    { image: "/gallery/Santi-night.jpg", text: ["Behind the walls of","Villa Santi"] }
   ],
   
   pricing: [
@@ -44,7 +45,7 @@ const config = {
       price: "42",
       currency: "USD",
       note: "Privatised electric buggy"
-    }
+    },
   ],
   
   gallery: [
@@ -211,14 +212,17 @@ const config = {
   <section class="section highlights">
     <div class="container">
       <h2>Highlights</h2>
-      <ul class="highlights-grid">
+      <div class="highlights-grid">
         {config.highlights.map(item => (
-          <li class="highlight-item">
-            <span class="highlight-icon">✓</span>
-            {item}
-          </li>
+          <div class="highlight-item">
+            <div class="highlight-image">
+              <img src={item.image} alt={item.text[0]} loading="lazy" />
+            </div>
+            <p class="highlight-text">{item.text[0]}</p>
+            <p class="highlight-text-sub">{item.text[1]}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   </section>
 
@@ -573,7 +577,7 @@ const config = {
 
   .hero-logo {
     position: absolute;
-    top: 10vw;
+    top: 8vw;
     right: 2vw;
     width: 30vw;
     min-width: 80px;
@@ -604,7 +608,7 @@ const config = {
   .hero-line1,
   .hero-line2 {
     display: block;
-    font-size: clamp(4rem, 20vw, 8rem);
+    font-size: clamp(3.5rem, 16vw, 8rem);
     font-weight: 600;
     letter-spacing: 0.02em;
     text-shadow: 0.15vw 0.15vw 0.5vw rgba(0, 0, 0, 0.5);
@@ -772,31 +776,62 @@ const config = {
   .highlights {
     background: rgba(0, 0, 0, 0.2);
   }
-  
+
   .highlights-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
-    list-style: none;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
   }
-  
+
+  @media (max-width: 900px) {
+    .highlights-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .highlights-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .highlight-item {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: white;
-    padding: 1.25rem 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    font-size: 1.05rem;
+    flex-direction: column;
   }
-  
-  .highlight-icon {
-    color: #25D366;
-    font-weight: bold;
-    font-size: 1.2rem;
+
+  .highlight-image {
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+
+  .highlight-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .highlight-image:hover img {
+    transform: scale(1.05);
+  }
+
+  .highlight-text {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #1a3a0f;
+    margin: 0.75rem 0 0 0;
+  }
+
+  .highlight-text-sub {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0.25rem 0 0 0;
   }
   
   /* Gallery Carousel */
