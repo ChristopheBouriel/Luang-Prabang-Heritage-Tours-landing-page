@@ -299,6 +299,7 @@ const config = {
 
       <!-- Booking Form (hidden by default) -->
       <form class="booking-form" id="bookingForm">
+        <button type="button" class="close-form-btn" id="closeFormBtn" aria-label="Close form">&times;</button>
         <h3>Book your tour</h3>
 
         <input type="text" id="name" placeholder="Your Name" required />
@@ -507,6 +508,7 @@ const config = {
   <script define:vars={{ whatsapp: config.whatsapp }}>
     const showFormBtns = document.querySelectorAll('.show-form-btn');
     const bookingForm = document.getElementById('bookingForm');
+    const closeFormBtn = document.getElementById('closeFormBtn');
     const bookBtn = document.getElementById('bookBtn');
     const tourTypeSelect = document.getElementById('tourType');
 
@@ -519,6 +521,11 @@ const config = {
         bookingForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
         setTimeout(() => bookingForm.querySelector('input')?.focus(), 300);
       });
+    });
+
+    // Fermer le formulaire
+    closeFormBtn?.addEventListener('click', function() {
+      bookingForm.classList.remove('visible');
     });
 
     // Envoyer vers WhatsApp
@@ -1180,10 +1187,28 @@ const config = {
     padding: 2rem;
     border-radius: 16px;
     text-align: center;
+    position: relative;
   }
 
   .booking-form.visible {
     display: flex;
+  }
+
+  .close-form-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem;
+  }
+
+  .close-form-btn:hover {
+    color: #333;
   }
 
   .booking-form h3 {
