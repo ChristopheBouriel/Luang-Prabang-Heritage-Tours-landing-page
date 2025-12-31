@@ -282,14 +282,13 @@ const config = {
               <span class="amount">{plan.price}</span>
             </div>
             <p class="note">{plan.note}</p>
-            <a 
-              href={`https://wa.me/${config.whatsapp}?text=Bonjour, je souhaite réserver une visite (${plan.name})`}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="pricing-cta"
+            <button
+              type="button"
+              class="pricing-cta show-form-btn"
+              data-tour-type={plan.name === "Join in" ? "Join-in Tour" : "Private Tour"}
             >
               Book
-            </a>
+            </button>
           </div>
         ))}
       </div>
@@ -297,6 +296,34 @@ const config = {
         💡  All taxes included<br>
         <strong>💵 {config.payment.note}</strong> — {config.payment.methods}
       </p>
+
+      <!-- Booking Form (hidden by default) -->
+      <form class="booking-form" id="bookingForm">
+        <h3>Book your tour</h3>
+
+        <input type="text" id="name" placeholder="Your Name" required />
+
+        <input type="date" id="date" required />
+
+        <input type="number" id="people" placeholder="Number of People" min="1" required />
+
+        <select id="language" required>
+          <option value="">Select Language</option>
+          {config.languages.map(lang => (
+            <option value={lang}>{lang}</option>
+          ))}
+        </select>
+
+        <select id="tourType" required>
+          <option value="">Tour Type</option>
+          <option value="Private Tour">Private Tour</option>
+          <option value="Join-in Tour">Join-in Tour</option>
+        </select>
+
+        <button type="button" class="pricing-cta" id="bookBtn">
+          Send to WhatsApp
+        </button>
+      </form>
     </div>
   </section>
 
@@ -474,6 +501,57 @@ const config = {
 
     window.addEventListener('scroll', toggleStickyCta, { passive: true });
     toggleStickyCta();
+  </script>
+
+  <!-- Script pour le formulaire WhatsApp -->
+  <script define:vars={{ whatsapp: config.whatsapp }}>
+    const showFormBtns = document.querySelectorAll('.show-form-btn');
+    const bookingForm = document.getElementById('bookingForm');
+    const bookBtn = document.getElementById('bookBtn');
+    const tourTypeSelect = document.getElementById('tourType');
+
+    // Afficher le formulaire au clic sur un bouton Book
+    showFormBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const tourType = this.dataset.tourType;
+        tourTypeSelect.value = tourType;
+        bookingForm.classList.add('visible');
+        bookingForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => bookingForm.querySelector('input')?.focus(), 300);
+      });
+    });
+
+    // Envoyer vers WhatsApp
+    bookBtn?.addEventListener('click', function() {
+      const name = document.getElementById('name').value;
+      const date = document.getElementById('date').value;
+      const people = document.getElementById('people').value;
+      const language = document.getElementById('language').value;
+      const tourType = document.getElementById('tourType').value;
+
+      if (!name || !date || !people || !language || !tourType) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      const formattedDate = new Date(date).toLocaleDateString('en-GB', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      const message = `Hello, I would like to book a tour.
+
+👤 Name: ${name}
+📅 Date: ${formattedDate}
+👥 People: ${people}
+🗣️ Language: ${language}
+🎫 Type: ${tourType}`;
+
+      const url = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    });
   </script>
 
   <!-- Script pour le carousel -->
@@ -1071,8 +1149,11 @@ const config = {
     background: #25D366;
     color: white;
     padding: 0.75rem 2rem;
+    border: none;
     border-radius: 50px;
     font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
     transition: background 0.2s, transform 0.2s;
   }
   
@@ -1086,6 +1167,53 @@ const config = {
     margin-top: 2rem;
     color: #555;
     font-size: 0.95rem;
+  }
+
+  /* Booking Form */
+  .booking-form {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 2rem auto 0;
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+  }
+
+  .booking-form.visible {
+    display: flex;
+  }
+
+  .booking-form h3 {
+    font-size: 1.25rem;
+    color: #1a3a0f;
+    margin-bottom: 0.5rem;
+  }
+
+  .booking-form input,
+  .booking-form select {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: white;
+  }
+
+  .booking-form select {
+    cursor: pointer;
+  }
+
+  .booking-form input:focus,
+  .booking-form select:focus {
+    outline: none;
+    border-color: #25D366;
+  }
+
+  .booking-form input::placeholder {
+    color: #999;
   }
   
   /* Testimonials */
