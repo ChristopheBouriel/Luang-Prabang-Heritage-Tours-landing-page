@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   // ⚠️ À MODIFIER : ton nom de domaine
-  site: 'https://ton-domaine.com',
+  site: 'https://luangprabangheritagetours.com',
   integrations: [sitemap()],
   compressHTML: true,
 });

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ton-domaine.com/sitemap-index.xml
+Sitemap: https://luangprabangheritagetours.com/sitemap-index.xml
