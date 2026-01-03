@@ -301,7 +301,10 @@ const config = {
 
         <input type="text" id="name" placeholder="Your Name" required />
 
-        <input type="date" id="date" required />
+        <div class="date-input-wrapper">
+          <input type="date" id="date" required />
+          <span class="date-placeholder">Select Date</span>
+        </div>
 
         <input type="number" id="people" placeholder="Number of People" min="1" required />
 
@@ -876,8 +879,16 @@ const config = {
   /* Smartphone : 3 + 3 + 3 */
   @media (max-width: 500px) {
     .flags-grid {
+      display: grid;
       grid-template-columns: repeat(3, 1fr);
-      max-width: 200px;
+      max-width: 220px;
+    }
+
+    /* Reset tablet overrides */
+    .flags-grid img:nth-child(-n+5),
+    .flags-grid img:nth-child(6),
+    .flags-grid img:nth-child(n+7) {
+      grid-column: auto;
     }
 
     .flags-grid img {
@@ -1262,6 +1273,43 @@ const config = {
 
   .booking-form input::placeholder {
     color: #999;
+  }
+
+  /* Date input wrapper for Safari mobile */
+  .date-input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .date-input-wrapper input[type="date"] {
+    width: 100%;
+    color: #333;
+  }
+
+  .date-input-wrapper .date-placeholder {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  /* Hide placeholder when date has value */
+  .date-input-wrapper input[type="date"]:valid + .date-placeholder,
+  .date-input-wrapper input[type="date"]:focus + .date-placeholder {
+    opacity: 0;
+  }
+
+  /* Safari: input date without value shows empty */
+  .date-input-wrapper input[type="date"]:not(:focus):invalid {
+    color: transparent;
+  }
+
+  .date-input-wrapper input[type="date"]:focus,
+  .date-input-wrapper input[type="date"]:valid {
+    color: #333;
   }
   
   /* Testimonials */
